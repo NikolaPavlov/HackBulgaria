@@ -12,8 +12,9 @@ def zero_insert(n):
     for x in range(0, len(numAsArr)):
         if (numAsArr[x] == numAsArr[x - 1]):
             answers.append(0)
-        answers.append(numAsArr[x])
-
+        if (int(numAsArr[x]) + int(numAsArr[x - 1]) % 10) == 0:
+            print('gg')
+        answers.append(numAsArr[x - 1])
     print(answers)
 
 
