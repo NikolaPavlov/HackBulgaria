@@ -1,22 +1,41 @@
-def numToArr(num):
-    arr = []
-    numAsStr = str(num)
-    for x in numAsStr:
-        arr.append(x)
-    return arr
-
-
 def zero_insert(n):
-    numAsArr = numToArr(n)
-    answers = []
-    for x in range(0, len(numAsArr)):
-        if (numAsArr[x] == numAsArr[x - 1]):
-            answers.append(0)
-        answers.append(numAsArr[x])
+    numbers = list(map(int, str(n)))
+    result = []
+    result2 = []
 
-    print(answers)
+    if (len(numbers) == 1):
+        return numbers
+
+    # same digits one after another check
+    for i in range(0, len(numbers) - 1):
+        result.append(numbers[i])
+        if (numbers[i] == numbers[i + 1]):
+            result.append(0)
+        # lame check fot index out of boundes
+        # if we hit next to last element
+        # add last element manualy
+        if (i == len(numbers) - 2):
+            result.append(numbers[len(numbers) - 1])
+
+    if len(result) > 0:
+        numbers = result
+
+    # digits one after another % 10 == 0 check
+    for i in range(0, len(numbers) - 1):
+        result2.append(numbers[i])
+        if ((numbers[i] + numbers[i + 1]) % 10) == 0:
+            result2.append(0)
+
+        # lame check fot index out of boundes
+        # if we hit next to last element
+        # add last element manualy
+        if (i == len(numbers) - 2):
+            result2.append(numbers[len(numbers) - 1])
+
+    return result2
 
 
-
-zero_insert(11113343)
-zero_insert(7557)
+if __name__ == "__main__":
+    print(zero_insert(116457))
+    print(zero_insert(55555555))
+    print(zero_insert(6446))
