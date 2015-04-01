@@ -1,5 +1,5 @@
 def sum_of_digits(n):
-    #reverse nums smaller than 0
+    # negative to positive numbers
     if (n < 0):
         n *= -1
 

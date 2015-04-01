@@ -15,3 +15,4 @@ if __name__ == "__main__":
     print(fibonacci(2))
     print(fibonacci(3))
     print(fibonacci(10))
+
