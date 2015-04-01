@@ -1,7 +1,7 @@
 from p02_checkIfNumberIsPrime import is_prime
 
 
-def primeNumberOfDivisors(n):
+def prime_number_of_divisiors(n):
     answers = []
     for x in range(1, n):
         if (n % x == 0):
@@ -11,7 +11,7 @@ def primeNumberOfDivisors(n):
 
 
 if __name__ == "__main__":
-    print(primeNumberOfDivisors(7))
-    print(primeNumberOfDivisors(8))
-    print(primeNumberOfDivisors(9))
+    print(prime_number_of_divisiors(7))
+    print(prime_number_of_divisiors(8))
+    print(prime_number_of_divisiors(9))
 

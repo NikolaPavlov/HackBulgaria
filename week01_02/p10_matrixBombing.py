@@ -1,3 +1,10 @@
+# need to finally resolve this shit
+
+
+
+
+
+"""
 def matrix_bombing_plan(m):
     dictionary = {}
 
@@ -10,3 +17,4 @@ def matrix_bombing_plan(m):
             dictionary[coordinates] = sum(bombed) + bomb
 
     return dictionary
+"""

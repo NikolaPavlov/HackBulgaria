@@ -1,12 +1,11 @@
 def is_prime(a):
-    isPrime = True
     if (a <= 1):
-        isPrime = False
+        return False
 
     for x in range(2, a - 1):
         if(a % x == 0):
-            isPrime = False
-    return isPrime
+            return False
+    return True
 
 
 if __name__ == "__main__":
