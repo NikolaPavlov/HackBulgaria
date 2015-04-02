@@ -1,5 +1,6 @@
 #fucking pandas everywhere. Where the fuck am I dude?
 ###############################################
+from p03_pandaClass import Panda
 
 
 class PandaSocialNetwork:
@@ -8,7 +9,7 @@ class PandaSocialNetwork:
         self.pandasInTheNetwork = {}
 
     def add_panda(self, Panda):
-        self.pandasInTheNetwork[Panda] = 1
+        self.pandasInTheNetwork[Panda] = []
 
     def has_panda(self, Panda):
         if Panda in self.pandasInTheNetwork:
@@ -18,9 +19,9 @@ class PandaSocialNetwork:
 ### dosen't work shit happened
     def make_frends(self, Panda1, Panda2):
         if Panda1 in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[Panda1] = [Panda2]
+            self.pandasInTheNetwork[Panda1] = []
         if Panda2 in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[Panda2] = [Panda1]
+            self.pandasInTheNetwork[Panda2] = []
 
         self.pandasInTheNetwork[Panda1].append(Panda2)
         self.pandasInTheNetwork[Panda2].append(Panda1)
@@ -44,9 +45,9 @@ class PandaSocialNetwork:
 ###############################################
 
 # Test 
-gogo = Panda("Gogo", "gogo@mail.bg", "male")
-pepa = Panda("Pepa", "pepa@mail.bg", "female")
-network = PandaSocialNetwork()
-network.add_panda(gogo)
-print(network.has_panda(gogo))
-network.make_frends(gogo, pepa)
+# gogo = Panda("Gogo", "gogo@mail.bg", "male")
+# pepa = Panda("Pepa", "pepa@mail.bg", "female")
+# network = PandaSocialNetwork()
+# network.add_panda(gogo)
+# print(network.has_panda(gogo))
+# network.make_frends(gogo, pepa)
