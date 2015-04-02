@@ -1,6 +1,6 @@
 import unittest
 
-from p03_pandaSocialNetwork import Panda
+from p03_pandaClass import Panda
 
 
 class TestPandaClass(unittest.TestCase):
