@@ -1,5 +1,4 @@
-#fucking pandas everywhere. Where the fuck am I dude?
-###############################################
+# Fucking pandas everywhere. Where the fuck am I dude?
 from p03_pandaClass import Panda
 
 
@@ -8,46 +7,47 @@ class PandaSocialNetwork:
     def __init__(self):
         self.pandasInTheNetwork = {}
 
-    def add_panda(self, Panda):
-        self.pandasInTheNetwork[Panda] = []
+    def add_panda(self, panda):
+        self.pandasInTheNetwork[panda] = []
 
-    def has_panda(self, Panda):
-        if Panda in self.pandasInTheNetwork:
+    def has_panda(self, panda):
+        if panda in self.pandasInTheNetwork:
             return True
         else:
             return False
-### dosen't work shit happened
-    def make_frends(self, Panda1, Panda2):
-        if Panda1 in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[Panda1] = []
-        if Panda2 in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[Panda2] = []
 
-        self.pandasInTheNetwork[Panda1].append(Panda2)
-        self.pandasInTheNetwork[Panda2].append(Panda1)
+    def make_frends(self, panda1, panda2):
+        if panda1 in self.pandasInTheNetwork:
+            self.pandasInTheNetwork[panda1] = []
+        if panda2 in self.pandasInTheNetwork:
+            self.pandasInTheNetwork[panda2] = []
 
+        self.pandasInTheNetwork[panda1].append(str(panda2))
+        self.pandasInTheNetwork[panda2].append(str(panda1))
 
-    def are_frends(self, Panda1, Panda2):
+    def are_frends(self, panda1, panda2):
         pass
 
-    def frends_of(self, Panda):
+    def frends_of(self, panda):
+        return self.pandasInTheNetwork[panda]
+
+    def connection_level(self, panda1, panda2):
         pass
 
-    def connection_level(self, Panda1, Panda2):
+    def are_connected(self, panda1, panda2):
         pass
 
-    def are_connected(self, Panda1, Panda2):
-        pass
-
-    def how_many_gender_in_network(self, level, Panda, gender):
+    def how_many_gender_in_network(self, level, panda, gender):
         pass
 
 ###############################################
 
-# Test 
-# gogo = Panda("Gogo", "gogo@mail.bg", "male")
-# pepa = Panda("Pepa", "pepa@mail.bg", "female")
-# network = PandaSocialNetwork()
-# network.add_panda(gogo)
-# print(network.has_panda(gogo))
-# network.make_frends(gogo, pepa)
+# Test
+gogo = Panda("Gogo", "gogo@mail.bg", "male")
+pepa = Panda("Pepa", "pepa@mail.bg", "female")
+network = PandaSocialNetwork()
+network.add_panda(gogo)
+network.add_panda(pepa)
+network.make_frends(gogo, pepa)
+#print(network.frends_of(gogo))
+

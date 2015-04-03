@@ -23,5 +23,8 @@ class TestPandaSocialNetwork(unittest.TestCase):
     def test_make_frends(self):
         self.socialNetwork.make_frends(self.panda1, self.panda2)
 
+    def test_frends_of(self):
+        self.socialNetwork.frends_of(self.panda1)
+
 if __name__ == "__main__":
     unittest.main()
