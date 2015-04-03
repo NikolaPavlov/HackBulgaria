@@ -11,7 +11,7 @@ class BankAccTests(unittest.TestCase):
     def test_constructor(self):
         self.assertTrue(isinstance(self.acc, BankAcc))
 
-    def test_show_balance(self):
+    def test_get_balance(self):
         self.assertEqual(self.acc.get_balance(), 512)
 
     def test_deposit_money_negative_amount(self):
@@ -49,6 +49,14 @@ class BankAccTests(unittest.TestCase):
         account3 = BankAcc('Shavrantia', 32, 'E')
         with self.assertRaises(ValueError):
             self.acc.transfer_to_acc(account3, 1)
+
+    def test_get_history(self):
+        self.acc.deposit_money(512)
+        self.acc.get_balance()
+        self.acc.withdraw(1)
+        self.acc.deposit_money(2)
+
+        self.assertEqual(self.acc.get_history(), "str ")
 
     def test_to_string(self):
         self.assertEqual(str(self.acc), "Bank account for GoGo with balance of 512$")
