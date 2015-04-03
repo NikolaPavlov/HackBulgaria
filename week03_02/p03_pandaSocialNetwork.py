@@ -42,7 +42,7 @@ class PandaSocialNetwork:
 
 ###############################################
 
-# Test
+# Tests the old way (the gold way)
 gogo = Panda("Gogo", "gogo@mail.bg", "male")
 pepa = Panda("Pepa", "pepa@mail.bg", "female")
 network = PandaSocialNetwork()
