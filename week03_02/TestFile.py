@@ -13,6 +13,6 @@ p3 = Point(3, 3)
 
 dictonary[p1] = ['']
 dictonary[p1] += [p2]
-
+print(p)
 
 print(dictonary.items())

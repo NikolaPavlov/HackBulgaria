@@ -7,6 +7,10 @@ class PandaSocialNetwork:
     def __init__(self):
         self.pandasInTheNetwork = {}
 
+    def getAllPandasInTheNetwork(self):
+        for panda in self.pandasInTheNetwork:
+            print(panda)
+
     def add_panda(self, panda):
         self.pandasInTheNetwork[panda] = []
 
@@ -17,16 +21,20 @@ class PandaSocialNetwork:
             return False
 
     def make_frends(self, panda1, panda2):
-        if panda1 in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[panda1] = []
-        if panda2 in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[panda2] = []
+        if panda1 not in self.pandasInTheNetwork:
+            self.add_panda(panda1)
+        if panda2 not in self.pandasInTheNetwork:
+            self.add_panda(panda2)
 
-        self.pandasInTheNetwork[panda1].append(str(panda2))
-        self.pandasInTheNetwork[panda2].append(str(panda1))
+        self.pandasInTheNetwork[panda1].append(panda2)
+        self.pandasInTheNetwork[panda2].append(panda1)
 
     def are_frends(self, panda1, panda2):
-        pass
+        if self.pandasInTheNetwork[panda1] == panda2:
+            if self.pandasInTheNetwork[panda2] == panda1:
+                return True
+        else:
+            return False
 
     def frends_of(self, panda):
         return self.pandasInTheNetwork[panda]
@@ -48,6 +56,9 @@ pepa = Panda("Pepa", "pepa@mail.bg", "female")
 network = PandaSocialNetwork()
 network.add_panda(gogo)
 network.add_panda(pepa)
-network.make_frends(gogo, pepa)
-#print(network.frends_of(gogo))
+network.make_frends(pepa, gogo)
+print(network.are_frends(pepa, gogo))
+
+network.getAllPandasInTheNetwork()
+
 
