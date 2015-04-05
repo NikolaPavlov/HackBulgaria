@@ -8,19 +8,22 @@ class PandaSocialNetwork:
         self.pandasInTheNetwork = {}
 
     def add_panda(self, panda):
-        self.pandasInTheNetwork[str(panda)] = []
+        if str(panda) not in self.pandasInTheNetwork:
+            self.pandasInTheNetwork[str(panda)] = []
+        else:
+            pass
 
     def has_panda(self, panda):
-        if panda in self.pandasInTheNetwork:
+        if str(panda) in self.pandasInTheNetwork:
             return True
         else:
             return False
 
     def make_frends(self, panda1, panda2):
         if panda1 not in self.pandasInTheNetwork:
-            self.add_panda(str(panda1))
+            self.add_panda(panda1)
         if panda2 not in self.pandasInTheNetwork:
-            self.add_panda(str(panda2))
+            self.add_panda(panda2)
 
         self.pandasInTheNetwork[str(panda1)].append(str(panda2))
         self.pandasInTheNetwork[str(panda2)].append(str(panda1))
@@ -32,6 +35,8 @@ class PandaSocialNetwork:
         return False
 
     def frends_of(self, panda):
+        if str(panda) not in self.pandasInTheNetwork:
+            return False
         return self.pandasInTheNetwork[str(panda)]
 
     def connection_level(self, panda1, panda2):
@@ -44,15 +49,3 @@ class PandaSocialNetwork:
         pass
 
 ###############################################
-
-# Tests the old way (the gold way)
-gogo = Panda("Gogo", "gogo@mail.bg", "male")
-pepa = Panda("Pepa", "pepa@mail.bg", "female")
-rado = Panda("rado", "gg@mail.bg", "male")
-network = PandaSocialNetwork()
-network.add_panda(gogo)
-network.add_panda(pepa)
-network.add_panda(rado)
-network.make_frends(gogo, pepa)
-print(network.are_frends(gogo, pepa))
-print(network.frends_of(gogo))

@@ -12,14 +12,23 @@ class TestPandaClass(unittest.TestCase):
     def test_constructor(self):
         self.assertIsInstance(self.panda1, Panda)
 
-    def test_name(self):
-        self.assertEqual(self.panda1.nameOfThePanda(), "Gogo")
+    def test_get_name(self):
+        self.assertEqual(self.panda1.get_name(), "Gogo")
+
+    def test_get_email(self):
+        self.assertTrue(self.panda1.get_email(), "gogo@email.com")
+
+    def test_get_gender(self):
+        self.assertTrue(self.panda1.get_gender(), "male")
 
     def test_eq(self):
+        self.assertTrue(self.panda1 == self.panda1)
+
+    def test_eq_false(self):
         self.assertFalse(self.panda1 == self.panda2)
 
     def test_to_str(self):
-        self.assertEqual(str(self.panda1), "Gogo - gogo@email.com - male")
+        self.assertEqual(str(self.panda1), "Gogo")
 
     def test_hash(self):
         self.assertIsNotNone(hash(self.panda1))
