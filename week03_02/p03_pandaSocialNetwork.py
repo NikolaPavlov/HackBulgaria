@@ -7,12 +7,8 @@ class PandaSocialNetwork:
     def __init__(self):
         self.pandasInTheNetwork = {}
 
-    def getAllPandasInTheNetwork(self):
-        for panda in self.pandasInTheNetwork:
-            print(panda)
-
     def add_panda(self, panda):
-        self.pandasInTheNetwork[panda] = []
+        self.pandasInTheNetwork[str(panda)] = []
 
     def has_panda(self, panda):
         if panda in self.pandasInTheNetwork:
@@ -22,22 +18,21 @@ class PandaSocialNetwork:
 
     def make_frends(self, panda1, panda2):
         if panda1 not in self.pandasInTheNetwork:
-            self.add_panda(panda1)
+            self.add_panda(str(panda1))
         if panda2 not in self.pandasInTheNetwork:
-            self.add_panda(panda2)
+            self.add_panda(str(panda2))
 
-        self.pandasInTheNetwork[panda1].append(panda2)
-        self.pandasInTheNetwork[panda2].append(panda1)
+        self.pandasInTheNetwork[str(panda1)].append(str(panda2))
+        self.pandasInTheNetwork[str(panda2)].append(str(panda1))
 
     def are_frends(self, panda1, panda2):
-        if self.pandasInTheNetwork[panda1] == panda2:
-            if self.pandasInTheNetwork[panda2] == panda1:
-                return True
-        else:
-            return False
+        if str(panda1) in self.pandasInTheNetwork[str(panda2)] and \
+            str(panda2) in self.pandasInTheNetwork[str(panda1)]:
+            return True
+        return False
 
     def frends_of(self, panda):
-        return self.pandasInTheNetwork[panda]
+        return self.pandasInTheNetwork[str(panda)]
 
     def connection_level(self, panda1, panda2):
         pass
@@ -53,12 +48,11 @@ class PandaSocialNetwork:
 # Tests the old way (the gold way)
 gogo = Panda("Gogo", "gogo@mail.bg", "male")
 pepa = Panda("Pepa", "pepa@mail.bg", "female")
+rado = Panda("rado", "gg@mail.bg", "male")
 network = PandaSocialNetwork()
 network.add_panda(gogo)
 network.add_panda(pepa)
-network.make_frends(pepa, gogo)
-print(network.are_frends(pepa, gogo))
-
-network.getAllPandasInTheNetwork()
-
-
+network.add_panda(rado)
+network.make_frends(gogo, pepa)
+print(network.are_frends(gogo, pepa))
+print(network.frends_of(gogo))

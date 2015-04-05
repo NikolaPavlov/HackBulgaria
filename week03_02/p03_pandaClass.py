@@ -15,35 +15,34 @@ class Panda:
         self.email = email
         self.gender = gender
 
-    def nameOfThePanda(self):
+    def __str__(self):
         return self.name
 
-    def email(self):
-        return self.email
-
-    def gender(self):
-        return self.gender
-
-    def __str__(self):
-        return str(self.name )
+    def __repr__(str):
+        pass
 
     def __hash__(self):
         return hash(self.name + self.email + self.gender)
 
     def __eq__(self, other):
+        '''
         # first Kpk way (my way)
         if self.name == other.name:
             if self.email == other.email:
                 if self.gender == other.gender:
                     return True
-        return False
-
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
         '''
+
         # second Kpk way (Ivo way)
         names = self.name == other.name
         emails = self.email == other.email
         genders = self.gender == other.gender
-        '''
 
         return names and emails and genders
 
@@ -52,6 +51,3 @@ class Panda:
 
     def is_female(self):
         return str.lower(self.gender) == "female"
-
-# Tests
-gogo = Panda("Gogo", "mail@goog.net", "male")
