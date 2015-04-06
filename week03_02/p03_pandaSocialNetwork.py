@@ -1,4 +1,6 @@
 # Fucking pandas everywhere. Where the fuck am I dude?
+
+import json
 from p03_pandaClass import Panda
 
 

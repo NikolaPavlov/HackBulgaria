@@ -29,7 +29,7 @@ class Panda:
         return self.name
 
     def __repr__(self):
-        pass
+        return "{} - {} - {}".format(self.name, self.email, self.gender)
 
     def __hash__(self):
         return hash(self.name + self.email + self.gender)
