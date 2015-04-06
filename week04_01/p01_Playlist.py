@@ -1,8 +1,6 @@
 from p01_Song import Song
 
 
-#code_songs = Playlist(name="Code", repeat=True, shuffle=True)
-
 class Playlist:
 
     def __init__(self, name="", repeat=False, shuffle=False):
@@ -19,9 +17,16 @@ class Playlist:
         self.songs.remove(song)
 
     def add_songs(self, songsArr):
-        self.songs.append(songsArr)
+        for song in songsArr:
+            self.add_song(str(song))
 
-song1 = Song(title="ma faka", length="1:22:22", artist="gogo band", album="no album")
-theList = Playlist()
-theList.add_song(song1)
-print(theList.songs)
+    def total_length(self):
+        pass
+
+# Tests
+play_list = Playlist()
+song1 = Song(artist="cherno feredje", length="10:00")
+song2 = Song(artist="proto", length="1:00")
+play_list.add_song(song1)
+play_list.add_song(song2)
+play_list.total_length()
