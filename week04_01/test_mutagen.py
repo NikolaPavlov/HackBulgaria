@@ -5,11 +5,13 @@ audio = MP3("/home/rastamandito/Music/indila.mp3")
 print(audio.info.length)
 '''
 
-import re
-import datetime
+import random
+
+arr =[1,2,3,4,5]
+copy_arr =[1,2,3,4,5]
 
 
-t = "10:15:30"
-h,m,s = re.split(':', t)
-print(h)
-
+for i in range(len(copy_arr)):
+    random_elem = random.choice(copy_arr)
+    print(random_elem)
+    copy_arr.remove(int(random_elem))

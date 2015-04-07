@@ -35,6 +35,22 @@ class Playlist:
             histogram[repr(song)] = self.songs.count(song)
         return histogram
 
+    def next_song(self):
+        first_song = self.songs[0]
+        # using random.choice ---> random elem from list withowth replacement
+
+        '''
+        alg for random nums withowth repeat
+
+        arr =[1,2,3,4,5]
+        copy_arr =[1,2,3,4,5]
+
+
+        for i in range(len(copy_arr)):
+            random_elem = random.choice(copy_arr)
+            print(random_elem)
+            copy_arr.remove(int(random_elem))
+        '''
 
 # Tests
 play_list = Playlist()
