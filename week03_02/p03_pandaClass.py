@@ -17,7 +17,7 @@ class Panda:
         self.gender = gender
 
     def get_name(self):
-        return str(self.name)
+        return self.name
 
     def get_email(self):
         return self.email
@@ -26,32 +26,16 @@ class Panda:
         return self.gender
 
     def __str__(self):
-        return self.name
+        return "I am {}-Panda, with email: {}, {}".format(self.name, self.email, self.gender)
 
     def __repr__(self):
         return "{} - {} - {}".format(self.name, self.email, self.gender)
 
     def __hash__(self):
-        return hash(self.name + self.email + self.gender)
+        return hash((self.name, self.email, self.gender))
 
     def __eq__(self, other):
-        # first Kpk way (my way)
-        if self.name == other.name:
-            if self.email == other.email:
-                if self.gender == other.gender:
-                    return True
-                return False
-            return False
-        return False
-
-        '''
-        # second Kpk way (Ivo way)
-        names = self.name == other.name
-        emails = self.email == other.email
-        genders = self.gender == other.gender
-
-        return names and emails and genders
-        '''
+        return (self.name, self.email, self.gender) == (other.name, other.email, other.gender)
 
     def is_male(self):
         return str.lower(self.gender) == "male"

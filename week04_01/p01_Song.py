@@ -9,12 +9,18 @@ class Song:
     def __str__(self):
         return "{} - {} from {} - {}".format(self.artist, self.title, self.album, self.length)
 
+    def __repr__(self):
+        return "{} - {} from {} - {}".format(self.artist, self.title, self.album, self.length)
+
     def __eq__(self, other):
         titles = self.title == other.title
         artists = self.artist == other.artist
         albums = self.album == other.album
         lengths = self.length == other.length
-        return titles and artists and albums and lengths
+        if titles and artists and albums and lengths:
+            return True
+        else:
+            return False
 
     def __hash__(self):
         return hash(self.title + self.artist + self.album)

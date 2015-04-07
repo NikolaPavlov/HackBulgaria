@@ -11,14 +11,14 @@ class Playlist:
         self.songs = []
 
     def add_song(self, song):
-        self.songs.append(str(song))
+        self.songs.append(song)
 
     def remove_song(self, song):
         self.songs.remove(song)
 
     def add_songs(self, songsArr):
         for song in songsArr:
-            self.add_song(str(song))
+            self.add_song(song)
 
     def total_length(self):
         pass

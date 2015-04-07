@@ -22,7 +22,7 @@ class TestPandaSocialNetwork(unittest.TestCase):
 
     def test_add_panda(self):
         self.socialNetwork.add_panda(self.panda1)
-        self.assertTrue(str(self.panda1) in self.socialNetwork.pandasInTheNetwork)
+        self.assertTrue(self.panda1 in self.socialNetwork.pandasInTheNetwork)
 
     def test_has_panda(self):
         self.assertTrue(self.socialNetwork.has_panda(self.panda1))
@@ -34,7 +34,7 @@ class TestPandaSocialNetwork(unittest.TestCase):
         self.assertTrue(self.socialNetwork.are_frends(self.panda1, self.panda2))
 
     def test_frends_of(self):
-        self.assertEqual(self.socialNetwork.frends_of(self.panda1), [str(self.panda2)])
+        self.assertEqual(self.socialNetwork.frends_of(self.panda1), [self.panda2])
 
     def test_frends_of_invalid(self):
         self.assertFalse(self.socialNetwork.frends_of(self.alone_panda))

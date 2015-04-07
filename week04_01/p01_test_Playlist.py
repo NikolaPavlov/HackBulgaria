@@ -20,15 +20,15 @@ class TestPlaylist(unittest.TestCase):
         self.assertTrue(isinstance(self.theList, Playlist))
 
     def test_add_song(self):
-        self.assertTrue(str(self.song1) in self.theList.songs)
+        self.assertTrue(self.song1 in self.theList.songs)
 
     def test_remove_song(self):
-        self.assertFalse(str(self.song2) in self.theList.songs)
+        self.assertFalse(self.song2 in self.theList.songs)
 
     def test_add_arr_of_songs(self):
         self.theList.add_songs(self.songsArr)
-        self.assertTrue(str(self.song3) in self.theList.songs)
-        self.assertTrue(str(self.song4) in self.theList.songs)
+        self.assertTrue(self.song3 in self.theList.songs)
+        self.assertTrue(self.song4 in self.theList.songs)
 
     def test_total_length(self):
         self.assertEqual(self.theList.total_length(), 1)

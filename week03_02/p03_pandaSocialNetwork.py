@@ -10,13 +10,13 @@ class PandaSocialNetwork:
         self.pandasInTheNetwork = {}
 
     def add_panda(self, panda):
-        if str(panda) not in self.pandasInTheNetwork:
-            self.pandasInTheNetwork[str(panda)] = []
+        if panda not in self.pandasInTheNetwork:
+            self.pandasInTheNetwork[panda] = []
         else:
             pass
 
     def has_panda(self, panda):
-        if str(panda) in self.pandasInTheNetwork:
+        if panda in self.pandasInTheNetwork:
             return True
         else:
             return False
@@ -27,19 +27,19 @@ class PandaSocialNetwork:
         if panda2 not in self.pandasInTheNetwork:
             self.add_panda(panda2)
 
-        self.pandasInTheNetwork[str(panda1)].append(str(panda2))
-        self.pandasInTheNetwork[str(panda2)].append(str(panda1))
+        self.pandasInTheNetwork[panda1].append(panda2)
+        self.pandasInTheNetwork[panda2].append(panda1)
 
     def are_frends(self, panda1, panda2):
-        if str(panda1) in self.pandasInTheNetwork[str(panda2)] and \
-            str(panda2) in self.pandasInTheNetwork[str(panda1)]:
+        if panda1 in self.pandasInTheNetwork[panda2] and \
+            panda2 in self.pandasInTheNetwork[panda1]:
             return True
         return False
 
     def frends_of(self, panda):
-        if str(panda) not in self.pandasInTheNetwork:
+        if panda not in self.pandasInTheNetwork:
             return False
-        return self.pandasInTheNetwork[str(panda)]
+        return self.pandasInTheNetwork[panda]
 
     def connection_level(self, panda1, panda2):
         pass
