@@ -13,25 +13,21 @@ class Song:
         return "{} - {} from {} - {}".format(self.artist, self.title, self.album, self.length)
 
     def __eq__(self, other):
-        titles = self.title == other.title
-        artists = self.artist == other.artist
-        albums = self.album == other.album
-        lengths = self.length == other.length
-        if titles and artists and albums and lengths:
-            return True
-        else:
-            return False
-
+        return (self.title, self.artist, self.length) == (other.title, other.artist, other.length)
     def __hash__(self):
         return hash(self.title + self.artist + self.album)
 
     def length_of_mp3(self, seconds=False, minutes=False, hours=False):
         all_seconds = 0
+
+        if isinstance(self.length, int):
+            return int(self.length)
+
         split_time = self.length.split(":")
         if len(split_time) == 3:
             all_seconds = int(split_time[0]) * 60 * 60 + int(split_time[1]) * 60 + int(split_time[2])
 
-        if len(split_time) == 2:
+        elif len(split_time) == 2:
             all_seconds = int(split_time[0]) * 60 + int(split_time[1])
 
         if seconds is True:

@@ -1,3 +1,4 @@
+import datetime
 from p01_Song import Song
 
 
@@ -21,12 +22,23 @@ class Playlist:
             self.add_song(song)
 
     def total_length(self):
+        total_length = 0
+        for song in self.songs:
+            total_length += song.length_of_mp3(seconds=True)
+        # Format the return format
+        return str(datetime.timedelta(seconds=total_length))
+    def artists(self):
+        # histogram of artists
         pass
+
 
 # Tests
 play_list = Playlist()
-song1 = Song(artist="cherno feredje", length="10:00")
+song1 = Song(artist="cherno feredje", length="0:33")
 song2 = Song(artist="proto", length="1:00")
+song3 = Song(artist="dnb", length="2:00")
 play_list.add_song(song1)
 play_list.add_song(song2)
-play_list.total_length()
+play_list.add_song(song3)
+
+#print(play_list.total_length())
