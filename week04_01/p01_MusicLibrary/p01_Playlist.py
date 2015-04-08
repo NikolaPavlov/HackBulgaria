@@ -84,7 +84,7 @@ class Playlist:
         for song in self.songs:
             output_table.append([song.title, song.artist, song.album, song.length])
 
-        print(tabulate(output_table, headers, tablefmt="fancy_grid"))
+        print(tabulate(output_table, headers, tablefmt="grid"))
 
 
 class ExcpPlayListOver(Exception):
