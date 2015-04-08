@@ -11,7 +11,6 @@ class Playlist:
         self.name = name
         self.repeat = repeat
         self.shuffle = shuffle
-
         self.songs = []
         self.song_num = 0
 
@@ -74,15 +73,27 @@ class Playlist:
                     print("Fuck!")
                 return song_for_return
 
-        # full random
+        # play with random and repeat when it's over
+        # need fixes (repeating songs)
         if self.repeat is True and self.shuffle is True:
-            pass
+            # shuffle the songs
+            shuffled_songs = [self.songs[i] for i in range(len(self.songs))]
+            random.shuffle(shuffled_songs)
+            self.songs = shuffled_songs
+
+            self.current_song = self.songs[self.song_num]
+            self.song_num += 1
+            if self.song_num == len(self.songs):
+                self.song_num = 0
+                return self.songs[self.song_num]
+            else:
+                return self.songs[self.song_num]
 
     def printing_the_list(self):
         output_table = []
-        headers = ["Song", "Artist", "Album", "Length"]
+        headers = ["Artist", "Song", "Album", "Length"]
         for song in self.songs:
-            output_table.append([song.title, song.artist, song.album, song.length])
+            output_table.append([song.artist, song.title, song.album, song.length])
 
         print(tabulate(output_table, headers, tablefmt="grid"))
 
@@ -93,13 +104,13 @@ class ExcpPlayListOver(Exception):
 
 def main():
     # Tests
-    play_list = Playlist(repeat=False, shuffle=True)
-    song1 = Song(artist="cherno feredje", length="0:33")
-    song2 = Song(artist="proto", length="1:00")
-    song3 = Song(artist="dnb", length="2:00")
-    song4 = Song(artist="dnb", length="2:00")
-    song5 = Song(artist="proto", length="1:00")
-    song6 = Song(artist="proto", length="22:00")
+    play_list = Playlist(repeat=True, shuffle=True)
+    song1 = Song(title="bikut mucho", artist="cherno feredje", length="0:33")
+    song2 = Song(title="Kaluger me goni", artist="cherno feredje", length="1:00")
+    song3 = Song(title="Haskovo", artist="cherno feredje", length="2:00")
+    song4 = Song(title="xxx", artist="cookie monsta", length="2:00")
+    song5 = Song(title="yyy", artist="cookie monsta", length="1:00")
+    song6 = Song(title="Are you there", artist="Josh Wink", length="22:00")
     play_list.add_song(song1)
     play_list.add_song(song2)
     play_list.add_song(song3)
@@ -107,11 +118,16 @@ def main():
     play_list.add_song(song5)
     play_list.add_song(song6)
 
-    # print(play_list.total_length())
-    # print(play_list.artists())
-    # print(play_list.next_song())
-    # print(play_list.next_song())
-    # print(play_list.next_song())
+    print(play_list.total_length())
+    print(play_list.artists())
+    print(play_list.next_song())
+    print(play_list.next_song())
+    print(play_list.next_song())
+    print(play_list.next_song())
+    print(play_list.next_song())
+    print(play_list.next_song())
+    print(play_list.next_song())
+    print(play_list.next_song())
     play_list.printing_the_list()
 
 if __name__ == "__main__":
