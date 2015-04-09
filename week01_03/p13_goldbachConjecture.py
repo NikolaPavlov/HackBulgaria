@@ -1,5 +1,3 @@
-# TODO: Should remove the last = sign
-
 # Check if number is prime
 def is_prime(a):
     isPrime = True
@@ -39,15 +37,13 @@ def goldbach(n):
     return answers
 
 
+# nice formating the output (tuples)
 def formatTheResult(n):
     results = goldbach(n)
-    output = str(n) + ' = '
+    output = []
 
     for arr in results:
-        output += str(arr[0])
-        output += ' + '
-        output += str(arr[1])
-        output += ' = '
+        output.append((arr[0], arr[1]))
 
     return output
 
@@ -58,3 +54,4 @@ if __name__ == "__main__":
     print(formatTheResult(8))
     print(formatTheResult(10))
     print(formatTheResult(100))
+
