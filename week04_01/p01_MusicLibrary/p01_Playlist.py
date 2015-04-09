@@ -1,5 +1,6 @@
 import datetime
 import random
+import json
 
 from tabulate import tabulate
 from p01_Song import Song
@@ -23,7 +24,6 @@ class Playlist:
     def add_songs(self, songsArr):
         for song in songsArr:
             self.add_song(song)
-
     def total_length(self):
         total_length = 0
         for song in self.songs:
@@ -97,6 +97,14 @@ class Playlist:
 
         print(tabulate(output_table, headers, tablefmt="grid"))
 
+    def prepare_json(self):
+        data = {
+        "name": self.name,
+        "songs:": [song.prepare_json() for song in self.songs]
+        }
+
+        return data
+
 
 class ExcpPlayListOver(Exception):
     pass
@@ -129,6 +137,7 @@ def main():
     print(play_list.next_song())
     print(play_list.next_song())
     play_list.printing_the_list()
+    print(play_list.prepare_json())
 
 if __name__ == "__main__":
     main()

@@ -1,3 +1,5 @@
+import json
+
 class Song:
 
     def __init__(self, title="unknow", artist="unknow", album="unknow", length=0):
@@ -14,6 +16,7 @@ class Song:
 
     def __eq__(self, other):
         return (self.title, self.artist, self.length) == (other.title, other.artist, other.length)
+
     def __hash__(self):
         return hash(self.title + self.artist + self.album)
 
@@ -39,3 +42,11 @@ class Song:
 
     def length_to_str(self):
         return self.length
+
+    def to_JSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+
+
+# Test
+song1 = Song()
+print(song1.to_JSON())
