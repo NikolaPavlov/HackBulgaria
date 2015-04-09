@@ -1,26 +1,39 @@
 def magic_square(matrix):
-    sums = []
+    all_sums = []
 
     # sum all rows
     for row in matrix:
-        sums.append(sum(row))
+        all_sums.append(sum(row))
 
     # sum all cols
     for i in range(0, len(matrix)):
-        sums.append(sum(row[i] for row in matrix))
+        sum_of_one_col = 0
+        for j in range(0, len(matrix)):
+            sum_of_one_col += matrix[j][i]
+        all_sums.append(sum_of_one_col)
 
-    # sum of diagonal
-    sums.append(sum(matrix[i][i] for i in range(len(matrix))))
+    # sum of first diagonal
+    sum_of_diagonal = 0
+    for i in range(0, len(matrix)):
+        sum_of_diagonal += matrix[i][i]
 
-    # sum of the other diagonal
-    sum_of_other_diagonal = 0
-    for j in range(len(matrix) - 1, -1 , -1):
-        sum_of_other_diagonal += matrix[i][j]
-        i += 1
-    sums.append(sum_of_other_diagonal)
+    all_sums.append(sum_of_diagonal)
 
-    print(sums)
+    # sum of second diagonal
+    sum_of_diagonal = 0
+    j = len(matrix) - 1
+    for i in range(0, len(matrix)):
+        sum_of_diagonal += matrix[i][j]
+        j -= 1
+    all_sums.append(sum_of_diagonal)
+
+    # check if all numbers in all_sums are equal
+    if len(set(all_sums)) == 1:
+        return True
+    else:
+        return False
 
 
 if __name__ == "__main__":
-    magic_square([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print(magic_square([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))
+    print(magic_square([[4, 9, 2], [3, 5, 7], [8, 1, 6]]))
