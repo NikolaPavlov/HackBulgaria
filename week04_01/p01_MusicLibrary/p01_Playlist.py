@@ -105,11 +105,11 @@ class ExcpPlayListOver(Exception):
 def main():
     # Tests
     play_list = Playlist(repeat=True, shuffle=True)
-    song1 = Song(title="bikut mucho", artist="cherno feredje", length="0:33")
-    song2 = Song(title="Kaluger me goni", artist="cherno feredje", length="1:00")
-    song3 = Song(title="Haskovo", artist="cherno feredje", length="2:00")
-    song4 = Song(title="xxx", artist="cookie monsta", length="2:00")
-    song5 = Song(title="yyy", artist="cookie monsta", length="1:00")
+    song1 = Song(title="bikut mucho", artist="Cherno Feredje", length="0:33")
+    song2 = Song(title="Kaluger me goni", artist="Cherno Feredje", length="1:00")
+    song3 = Song(title="Haskovo", artist="Cherno Feredje", length="2:00")
+    song4 = Song(title="Ginger", artist="Cookie Monsta", length="2:00")
+    song5 = Song(title="yyy", artist="Cookie Monsta", length="1:00")
     song6 = Song(title="Are you there", artist="Josh Wink", length="22:00")
     play_list.add_song(song1)
     play_list.add_song(song2)

@@ -19,7 +19,8 @@ class TestAudio(unittest.TestCase):
         self.assertTrue(self.songObj1 == self.songObj1)
 
     def test_hash(self):
-        self.assertIsNotNone(hash(self.songObj1))
+        #self.assertIsNotNone(hash(self.songObj1))
+        self.assertTrue(isinstance(hash(self.songObj1), int))
 
     def test_length_of_mp3_seconds(self):
         self.assertEqual(self.songObj1.length_of_mp3(seconds=True), 224)

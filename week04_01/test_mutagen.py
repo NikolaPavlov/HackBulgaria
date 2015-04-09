@@ -22,4 +22,4 @@ x = [arr[i] for i in range(len(arr))]
 random.shuffle(x)
 print(x)
 '''
-print(random.shuffle(arr))
+print(random.shuffle)
