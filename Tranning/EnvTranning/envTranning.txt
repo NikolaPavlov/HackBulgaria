@@ -1,0 +1,15 @@
+pip freeze
+
+virtualenv -p /usr/bin/python name_env ---> add python to virtual env
+
+source music_librrary/bin/activate ---> activate the env
+
+pip install -r file_with_requirements ---> install all reguirements
+
+pipfreeze > requirements.txt ---> create requirements
+
+deactivate
+
+
+
+
