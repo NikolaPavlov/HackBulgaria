@@ -1,0 +1,6 @@
+some txt file
+for test
+working with files 
+in python
+
+python > c# > php
