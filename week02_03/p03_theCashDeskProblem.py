@@ -16,7 +16,7 @@ class Bill:
         return("A " + str(self.num) + "$ bill")
 
     def __repr__(self):
-        return("This is repr" + str(self.num))
+        return(str(self))
 
     def __int__(self):
         return(int(self.num))
@@ -25,7 +25,7 @@ class Bill:
         return self.num == other.num
 
     def __hash__(self):
-        return hash(self.num.__str__())
+        return hash(self.num.__hash__())
 
 ##################################################
 
@@ -39,9 +39,7 @@ class BatchBill:
         return len(self.bills)
 
     def total(self):
-        total_sum = 0
-        for bill in self.bills:
-            total_sum += int(bill)
+        return sum([int(bill) for bill in self.bills])
 
     # iterate obj
     def __getitem__(self, index):
@@ -53,16 +51,35 @@ class BatchBill:
 class CashDesk:
 
     def __init__(self):
-        self.money = []
+        self.bank = {}
+        self.all_money = 0
 
-    def take_money(self, currency):
-        self.money.append(currency)
+    def add_in_bank(self, money):
+        if isinstance(money, Bill):
+            if money in self.bank:
+                self.bank[money] += 1
+            else:
+                self.bank[money] = 1
+        elif isinstance(money, BatchBill):
+            for bill in money:
+                if bill in self.bank:
+                    self.bank[bill] += 1
+                else:
+                    self.bank[bill] = 1
+
+    def take_money(self, money):
+        self.add_in_bank(money)
+
+        if isinstance(money, Bill):
+            self.all_money += int(money)
+        elif isinstance(money, BatchBill):
+            self.all_money += money.total()
+
 
     def total(self):
-        result = []
-        for money in self.money:
-            # go implement int in previous 2 classes
-            result += int(money)
-        return result
+        return self.all_money
+
+    def inspect(self):
+        return self.bank
 
 ##################################################
