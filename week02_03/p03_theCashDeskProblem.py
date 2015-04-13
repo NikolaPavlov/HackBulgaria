@@ -75,7 +75,6 @@ class CashDesk:
         elif isinstance(money, BatchBill):
             self.all_money += money.total()
 
-
     def total(self):
         return self.all_money
 

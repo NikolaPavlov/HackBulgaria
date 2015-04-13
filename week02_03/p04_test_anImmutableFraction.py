@@ -9,6 +9,8 @@ class TestFraction(unittest.TestCase):
         self.a = Fraction(1, 2)
         self.b = Fraction(2, 4)
         self.c = Fraction(1, 2)
+        self.d = Fraction(5, 6)
+        self.a_plus_b = self.a + self.b
 
     def test_constructor(self):
         self.assertIsInstance(self.a, Fraction)
@@ -20,17 +22,31 @@ class TestFraction(unittest.TestCase):
         self.assertTrue(self.a == self.c)
 
     def test_eq_false(self):
-        self.assertFalse(self.a == self.b)
+        self.assertFalse(self.a == self.d)
 
-    def test_add(self):
-        self.assertEqual((self.a + self.b), 1)
+    # 1 / 2 + 2 / 4 =
+    def test_add1(self):
+        self.assertEqual(self.a + self.b, Fraction(1, 1))
 
-    def test_sub(self):
-        self.assertEqual((self.a - self.b), 0)
+    # 1 / 2 + 5 / 6 =
+    def test_add2(self):
+        self.assertEqual(self.a + self.d, Fraction(4, 3))
 
-    def test_multiplication(self):
-        self.assertEqual((self.a * self.b), 1)
+    # 1 / 2 - 1 / 2 =
+    def test_sub1(self):
+        self.assertTrue(self.a - self.b, Fraction(6, 6))
 
+    # 1 / 2 - 5 / 6 =
+    def test_sub2(self):
+        self.assertEqual(self.a - self.d, Fraction(1, 3))
+
+    # 1 / 2 * 1 / 2 =
+    def test_multiplication1(self):
+        self.assertEqual((self.a * self.b), Fraction(1, 4))
+
+    # 1 / 2 * 5 / 6 =
+    def test_multiplication2(self):
+        self.assertEqual((self.a * self.d), Fraction(5, 12))
 
 
 if __name__ == "__main__":

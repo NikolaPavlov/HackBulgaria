@@ -1,5 +1,6 @@
 import sys
 
+
 def main():
     text_from_all_files = []
 

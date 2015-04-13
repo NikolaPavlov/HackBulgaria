@@ -24,6 +24,7 @@ class Playlist:
     def add_songs(self, songsArr):
         for song in songsArr:
             self.add_song(song)
+
     def total_length(self):
         total_length = 0
         for song in self.songs:

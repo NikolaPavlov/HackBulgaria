@@ -1,60 +1,68 @@
-# Fractions where is the fucking pandas?
-from fractions import gcd
+# Fractions where is the fucking panda?
 
 
 class Fraction:
 
-    def __init__(self, numerator, denominator):
-        self.greatest_divisor = gcd(numerator, denominator)
-        self.numerator = numerator
+    def __init__(self, nominator, denominator):
+        self.nominator = nominator
         self.denominator = denominator
 
     def __str__(self):
-        return "{} / {}".format(self.numerator, self.denominator)
+        if self.nominator % self.denominator == 0:
+            return str(int(self.nominator / self.denominator))
+        else:
+            return "{} / {}".format(self.nominator, self.denominator)
 
     def __repr__(self):
         return self.__str__()
 
     def __eq__(self, other):
-        return (self.numerator, self.denominator) == \
-        (other.numerator, other.denominator)
+        self = self.reducer(self.nominator, self.denominator)
+        other = self.reducer(other.nominator, other.denominator)
 
-# ########################################################################
+        if self.nominator == other.nominator:
+            if self.denominator == other.denominator:
+                return True
+            return False
+        return False
+
+    def reducer(self, a, b):
+        for i in range(a, 0, -1):
+            if b % i == 0 and a % i == 0:
+                a /= i
+                b /= i
+                return Fraction(a, b)
+
     def __add__(self, other):
-        numerator = (self.numerator * other.denominator) +\
-         (other.numerator * self.denominator)
-        denominator = self.denominator * other.denominator
-        if numerator % denominator == 0:
-            return int(numerator / denominator)
-        else:
-            return Fraction(numerator, denominator)
+        # reduce the two fraction
+        self = self.reducer(self.nominator, self.denominator)
+        other = other.reducer(other.nominator, other.denominator)
+
+        new_nominator = self.nominator * other.denominator + self.denominator * other.nominator
+        new_denominator = self.denominator * other.denominator
+        return Fraction(int(new_nominator), int(new_denominator))
 
     def __sub__(self, other):
-        numerator = (self.numerator * other.denominator) -\
-         (other.numerator * self.denominator)
-        denominator = self.denominator * other.denominator
-        if numerator % denominator == 0:
-            return int(numerator / denominator)
-        else:
-            return Fraction(numerator, denominator)
+        # reduce the two fraction
+        self = self.reducer(self.nominator, self.denominator)
+        other = other.reducer(other.nominator, other.denominator)
+
+        new_nominator = self.nominator * other.denominator - self.denominator * other.nominator
+        new_denominator = self.denominator * other.denominator
+        return Fraction(int(new_nominator), int(new_denominator))
+
 
     def __mul__(self, other):
-        numerator = self.numerator * other.numerator
-        denominator = self.denominator * other.denominator
-        if numerator % denominator == 0:
-            return int(numerator / denominator)
-        else:
-            return Fraction(numerator / self.greatest_divisor, denominator / self.greatest_divisor)
+        self = self.reducer(self.nominator, self.denominator)
+        other = other.reducer(other.nominator, other.denominator)
 
-    def division(self, other):
-        pass
-
-    def test(self, other):
-        print(self.numerator)
-        print(self.denominator)
-        print(other.numerator)
-        print(other.denominator)
+        new_nominator = self.nominator * other.nominator
+        new_denominator = self.denominator * other.denominator
+        return Fraction(int(new_nominator), int(new_denominator))
 
 a = Fraction(1, 2)
 b = Fraction(2, 4)
-print(a * b)
+c = Fraction(5, 6)
+print(a - b)
+print(a - c)
+print(a == b)
