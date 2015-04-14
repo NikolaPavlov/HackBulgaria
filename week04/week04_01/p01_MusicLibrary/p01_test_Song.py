@@ -37,13 +37,12 @@ class TestAudio(unittest.TestCase):
         self.assertEqual(self.songObj2.length_of_mp3(seconds=True), 10)
 
     def test_length_of_mp3_minutes(self):
-        self.songObj3 = Song(length = "1:10")
+        self.songObj3 = Song(length="1:10")
         self.assertEqual(self.songObj3.length_of_mp3(seconds=True), 70)
 
     def test_length_of_mp3_hours(self):
         self.songObj4 = Song(length="1:00:00")
         self.assertEqual(self.songObj4.length_of_mp3(seconds=True), 3600)
-
 
     def test_length_to_str(self):
         self.assertEqual(self.songObj1.length_to_str(), self.songObj1.length)
