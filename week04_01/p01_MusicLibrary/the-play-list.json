@@ -1,0 +1,41 @@
+{
+ "songs": [
+  {
+   "length": "0:33",
+   "title": "bikut mucho",
+   "artist": "Cherno Feredje",
+   "album": "unknow"
+  },
+  {
+   "length": "1:00",
+   "title": "Kaluger me goni",
+   "artist": "Cherno Feredje",
+   "album": "unknow"
+  },
+  {
+   "length": "2:00",
+   "title": "Haskovo",
+   "artist": "Cherno Feredje",
+   "album": "unknow"
+  },
+  {
+   "length": "2:00",
+   "title": "Ginger",
+   "artist": "Cookie Monsta",
+   "album": "unknow"
+  },
+  {
+   "length": "1:00",
+   "title": "yyy",
+   "artist": "Cookie Monsta",
+   "album": "unknow"
+  },
+  {
+   "length": "22:00",
+   "title": "Are you there",
+   "artist": "Josh Wink",
+   "album": "unknow"
+  }
+ ],
+ "name": "the-play-list"
+}

@@ -1,5 +1,6 @@
 import json
 
+
 class Song:
 
     def __init__(self, title="unknow", artist="unknow", album="unknow", length=0):
@@ -12,7 +13,7 @@ class Song:
         return "{} - {} from {} - {}".format(self.artist, self.title, self.album, self.length)
 
     def __repr__(self):
-        return "{} - {} from {} - {}".format(self.artist, self.title, self.album, self.length)
+        return self.__str__()
 
     def __eq__(self, other):
         return (self.title, self.artist, self.length) == (other.title, other.artist, other.length)
@@ -20,9 +21,11 @@ class Song:
     def __hash__(self):
         return hash(self.title + self.artist + self.album)
 
+    # The description on HackBulgaria isn't clear, I didn't need this conversion
     def length_of_mp3(self, seconds=False, minutes=False, hours=False):
         all_seconds = 0
 
+        # If there is only seconds return them
         if isinstance(self.length, int):
             return int(self.length)
 
@@ -44,9 +47,5 @@ class Song:
         return self.length
 
     def to_JSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
-
-
-# Test
-song1 = Song()
-print(song1.to_JSON())
+        song_dict = self.__dict__
+        return {key: song_dict[key] for key in song_dict}
