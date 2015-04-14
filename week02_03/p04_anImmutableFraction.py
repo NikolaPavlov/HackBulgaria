@@ -51,15 +51,3 @@ class Fraction:
         new_denominator = self.denominator * other.denominator
         new_fraction = Fraction(new_nominator, new_denominator)
         return Fraction.reduce_fraction(new_fraction)
-
-
-a = Fraction(3, 6)
-b = Fraction(1, 2)
-c = Fraction(1, 3)
-d = Fraction(2, 3)
-# print(Fraction.reduce_fraction(a))
-# print(b + c)
-# print(d + d)
-# print(b - c)
-# print(b - d)
-print(a * b)
