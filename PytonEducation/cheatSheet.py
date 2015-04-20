@@ -4,7 +4,7 @@ isinstance(obj1, className)
 eval(str) # Evaluates str and return obj
 print(r'C:\some\name')  # printing raw string
 word[-1] # last index in of word
-word[2:5] # slicing from positio 2(included) to position 5(excluded) 
+word[2:5] # slicing from positio 2(included) to position 5(excluded)
 
 # Strings are imutable, lists mutable
 
@@ -26,3 +26,10 @@ print(test_doc.__doc__
 
 #PEP8 underscore_convention_for_naming_variables_like_a_boss
 
+
+
+# add from another folder
+# some_file.py
+import sys
+sys.path.insert(0, '/path/to/application/app/folder')
+import file

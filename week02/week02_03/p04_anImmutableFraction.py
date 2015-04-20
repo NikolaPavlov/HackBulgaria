@@ -1,6 +1,3 @@
-# Fractions where is the fucking panda?
-
-
 class Fraction:
 
     def __init__(self, nominator, denominator):
