@@ -2,7 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 # test git hub with basic auth ( it's worked!!!)
-# print(requests.get('https://api.github.com/user', auth=HTTPBasicAuth('NikolaPavlov', 'eptsux8085')))
+# print(requests.get('https://api.github.com/user', auth=HTTPBasicAuth('NikolaPavlov', 'secret-pass')))
 
 # test mail.bg with basic auth
 # print(requests.get('http://mail.bg', auth=HTTPBasicAuth('rastamandito@mail.bg', 'secret-pass')).status_code)
