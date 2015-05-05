@@ -18,10 +18,6 @@ select_query = """
     """
 
 
-
-
-
-
 # cursor.execute(add_user_query)
 obj = cursor.execute(select_query)
 for row in obj:

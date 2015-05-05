@@ -1,4 +1,5 @@
 import sqlite3
+
 database_name = 'polyglot.db'
 create_table_query = """
 CREATE TABLE users(id INTEGER PRIMARY KEY, name TEXT,
