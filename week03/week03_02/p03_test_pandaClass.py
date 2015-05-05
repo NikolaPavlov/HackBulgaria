@@ -35,7 +35,7 @@ class TestPandaClass(unittest.TestCase):
         self.assertFalse(self.panda1 == self.panda2)
 
     def test_to_str(self):
-        self.assertEqual(str(self.panda1), \
+        self.assertEqual(str(self.panda1),
             "I am Gogo-Panda, with email: gogo@email.com, male")
 
     def test_hash(self):
