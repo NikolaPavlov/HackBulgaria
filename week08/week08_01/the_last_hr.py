@@ -1,60 +1,30 @@
-# last row id  --->
 import requests
 import sqlite3
 
 
-r = requests.get('https://hackbulgaria.com/api/students/')
-# print(r.json())
-# print(r.headers)
-input_json = r.json()
+HEADERS = {
+    "User-Agent": "User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+}
 
-db_name = 'hackbulgaria_info.db'
-conn = sqlite3.connect(db_name)
-conn.row_factory = sqlite3.Row
-cursor = conn.cursor()
 
-# Create base for students
-query_create_students = '''
-    CREATE TABLE IF NOT EXISTS students(
-    student_id INTEGER PRIMARY KEY,
-    name TEXT,
-    github TEXT)
-    '''
-cursor.execute(query_create_students)
-query_insert_into_students = '''
-    INSERT INTO students(name, github)
-    VALUES(?, ?)
-    '''
-for student in input_json:
-    # print(student['name'])
-    temp_name = student['name']
-    temp_github = student['github']
-    cursor.execute(query_insert_into_students, (temp_name, temp_github))
-    conn.commit()
+class Crawler:
 
-# Create base for courses
-courses_set = set()
+    def __init__(self, url):
+        r = requests.get(url, headers=HEADERS)
+        self.data = r.json()
+        self.users = []
 
-query_create_courses = '''
-    CREATE TABLE IF NOT EXISTS courses(
-    course_id INTEGER PRIMARY KEY,
-    course_name TEXT)
-    '''
-cursor.execute(query_create_courses)
-query_insert_into_courses = '''
-    INSERT INTO courses(course_name)
-    VALUES(?)
-    '''
-for student in input_json:
-    temp_course_name = student['courses']
-    cursor.execute(query_insert_into_courses, (temp_course_name,))
-    conn.commit()
+    def set_users(self):
+        for line in self.data:
+            name = line['name']
+            github = line['github']
+            courses = line['courses']
+            self.users.append(line['name'], line['github'], line['courses'])
 
-# Create relation base ( add group here, add primar key(optional))
-query = '''
-    CREATE TABLE IF NOT EXISTS students_to_courses
-    student_id INTEGER,
-    course_id INTEGER,
-    FOREIGN KEY(student_id) REFERENCES students(student_id),
-    FOREIGN KEY(course_id) REFERENCES couses(couse_id)
-    '''
+    def get_data(self):
+        print(self.data)
+
+
+cw = Crawler('https://hackbulgaria.com/api/students/')
+# cw.get_data()
+print(cw.users())

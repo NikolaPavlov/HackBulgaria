@@ -1,5 +1,6 @@
 from company_maker import CompanyMaker
 
+
 class ConsoleOutputHandler:
 
     def __init__(self):
