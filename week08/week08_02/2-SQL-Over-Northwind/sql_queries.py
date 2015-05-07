@@ -14,7 +14,8 @@ class Query:
             SELECT FirstName, LastName, Title FROM Employees;
             '''
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {}'.format(emp['FirstName'], emp['LastName'], emp['Title']))
+            print('{} |---| {} |---| {}'.format(
+                emp['FirstName'], emp['LastName'], emp['Title']))
 
 # 2. List all employees from Seattle.
     def list_emp_from_Seattle(self):
@@ -40,7 +41,8 @@ class Query:
             Select * FROM employees where Title LIKE '%Sales%';
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {}'.format(emp['FirstName'], emp['LastName'], emp['Title']))
+            print('{} |---| {} |---| {}'.format(
+                emp['FirstName'], emp['LastName'], emp['Title']))
 
 # 5. List all females employees that work in the Sales department.
     def list_all_female_from_sales(self):
@@ -50,23 +52,28 @@ class Query:
             AND (TitleOfCourtesy = 'Ms.' OR TitleOfCourtesy = 'Mrs.');
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {} |---| {}'.format(emp['FirstName'], emp['LastName'], emp['Title'], emp['TitleOfCourtesy']))
+            print('{} |---| {} |---| {} |---| {}'.format(
+                emp['FirstName'], emp['LastName'], emp['Title'], emp['TitleOfCourtesy']))
 
 # 6. List the 5 oldest employees.
     def list_5_oldest_emp(self):
         query = """
-            SELECT * FROM employees ORDER BY BirthDate LIMIT 5;
+            SELECT * FROM employees
+            ORDER BY BirthDate LIMIT 5;
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {}'.format(emp['FirstName'], emp['LastName'], emp['BirthDate']))
+            print('{} |---| {} |---| {}'.format(
+                emp['FirstName'], emp['LastName'], emp['BirthDate']))
 
 # 7. List the first 5 hires of the company.
     def list_first_5_hires_in_comp(self):
         query = """
-            SELECT * FROM employees ORDER BY HireDate LIMIT 5;
+            SELECT * FROM employees
+            ORDER BY HireDate LIMIT 5;
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {}'.format(emp['FirstName'], emp['LastName'], emp['HireDate']))
+            print('{} |---| {} |---| {}'.format(
+                emp['FirstName'], emp['LastName'], emp['HireDate']))
 
 # 8. List the employee who reports to no one (the boss)
     def list_emp_reports_to_noone(self):
@@ -74,10 +81,12 @@ class Query:
         check for empty cell with null !!!
         '''
         query = """
-            SELECT * FROM employees WHERE ReportsTo IS null;
+            SELECT * FROM employees WHERE
+            ReportsTo IS null;
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {}'.format(emp['FirstName'], emp['LastName'], emp['ReportsTo']))
+            print('{} |---| {} |---| {}'.format(
+                emp['FirstName'], emp['LastName'], emp['ReportsTo']))
 
 # 9. List all employes by their first and last name, and the first and last name of the employees that they report to.
     # WTF WTF
@@ -85,7 +94,8 @@ class Query:
 # 10. Count all female employees.
     def count_all_female_emp(self):
         query = """
-             Select COUNT(*) FROM employees WHERE (TitleOfCourtesy = 'Ms.' OR TitleOfCourtesy = 'Mrs.');
+             Select COUNT(*) FROM employees
+             WHERE (TitleOfCourtesy = 'Ms.' OR TitleOfCourtesy = 'Mrs.');
         """
         for i in self.cursor.execute(query):
             print(i['COUNT(*)'])
@@ -93,7 +103,8 @@ class Query:
 # 11. Count all male employees.
     def count_all_male_emp(self):
         query = """
-            Select COUNT(*) FROM employees WHERE (TitleOfCourtesy = 'Mr.' OR TitleOfCourtesy = 'Dr.');
+            Select COUNT(*) FROM employees
+            WHERE (TitleOfCourtesy = 'Mr.' OR TitleOfCourtesy = 'Dr.');
         """
         for i in self.cursor.execute(query):
                     print(i['COUNT(*)'])
@@ -105,18 +116,23 @@ class Query:
 # 13. List all OrderIDs and the employees (by first and last name) that have created them.
     def list_all_orderIDs_and_emp_who_create_it(self):
         query = """
-            SELECT OrderID, FirstName, LastName FROM Orders JOIN Employees WHERE Orders.EmployeeID = Employees.EmployeeID;
+            SELECT OrderID, FirstName, LastName
+            FROM Orders JOIN Employees
+            WHERE Orders.EmployeeID = Employees.EmployeeID;
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {} |---| {}'.format(emp['OrderID'], emp['FirstName'], emp['LastName']))
+            print('{} |---| {} |---| {}'.format(
+                emp['OrderID'], emp['FirstName'], emp['LastName']))
 
 # 14. List all OrderIDs and the shipper name that the order is going to be shipped via.
     def list_all_orderIDs_and_the_shipper(self):
         query = """
-            Select OrderID, CompanyName From orders JOIN shippers ON orders.ShipVia = shippers.ShipperID;
+            Select OrderID, CompanyName FROM orders
+            JOIN shippers ON orders.ShipVia = shippers.ShipperID;
         """
         for emp in self.cursor.execute(query):
-            print('{} |---| {}'.format(emp['OrderID'], emp['CompanyName']))
+            print('{} |---| {}'.format(
+                emp['OrderID'], emp['CompanyName']))
 
 # 15. List all contries and the total number of orders that are going to be shipped there.
     def list_all_packages_shiped_to_countries(self):
@@ -132,7 +148,12 @@ class Query:
 
 # 18. List all orders, with the employee serving them and the customer, that has placed them.
     def all_orders_linked_emp_and_customer(self):
-        pass
+        query = """
+            SELECT OrderID, CustomerID, FirstName, LastName FROM Orders JOIN Employees
+        """
+        for emp in self.cursor.execute(query):
+            print('OrderId: {} |---|CustomerID: {} |---| Employee: {} {}'.format(
+                emp['OrderID'], emp['CustomerID'], emp['FirstName'], emp['LastName']))
 
 # 19. List for which customer, which shipper is going to deliver the order.
     def list_shipper_for_each_customer(self):
@@ -143,7 +164,7 @@ q = Query()
 # q.list_emp_names()
 # q.list_emp_from_Seattle()
 # q.list_emp_from_London()
-q.list_emp_in_sales_dep()
+# q.list_emp_in_sales_dep()
 # q.list_all_female_from_sales()
 # q.list_5_oldest_emp()
 # q.list_first_5_hires_in_comp()
@@ -152,4 +173,4 @@ q.list_emp_in_sales_dep()
 # q.count_all_male_emp()
 # q.list_all_orderIDs_and_emp_who_create_it()
 # q.list_all_orderIDs_and_the_shipper()
-
+# q.all_orders_linked_emp_and_customer()
