@@ -59,7 +59,7 @@ class Query:
     def list_5_oldest_emp(self):
         query = """
             SELECT * FROM employees
-            ORDER BY BirthDate LIMIT 5;
+            ORDER BY BirthDate ASC LIMIT 5;
         """
         for emp in self.cursor.execute(query):
             print('{} |---| {} |---| {}'.format(
@@ -69,7 +69,7 @@ class Query:
     def list_first_5_hires_in_comp(self):
         query = """
             SELECT * FROM employees
-            ORDER BY HireDate LIMIT 5;
+            ORDER BY HireDate ASC LIMIT 5;
         """
         for emp in self.cursor.execute(query):
             print('{} |---| {} |---| {}'.format(
@@ -78,7 +78,7 @@ class Query:
 # 8. List the employee who reports to no one (the boss)
     def list_emp_reports_to_noone(self):
         '''
-        check for empty cell with null !!!
+            check for empty cell with null !!!
         '''
         query = """
             SELECT * FROM employees WHERE
@@ -89,12 +89,22 @@ class Query:
                 emp['FirstName'], emp['LastName'], emp['ReportsTo']))
 
 # 9. List all employes by their first and last name, and the first and last name of the employees that they report to.
-    # WTF WTF
+    def all_emp_and_who_they_report(self):
+        '''
+            LEFT JOIN ---> return all rows from the table when we get data
+        '''
+        query = """
+            SELECT e1.FirstName, e1.LastName as name,
+            SELECT e2.FirstName, e2.LastName as manager_name,
+            FROM employees AS e1
+            JOIN employees AS e2;
+            ON e1.ReportsTo = e2.EmployeeID
+        """
 
 # 10. Count all female employees.
     def count_all_female_emp(self):
         query = """
-             Select COUNT(*) FROM employees
+             Select COUNT(EmployeeID) FROM employees AS emp_count
              WHERE (TitleOfCourtesy = 'Ms.' OR TitleOfCourtesy = 'Mrs.');
         """
         for i in self.cursor.execute(query):
@@ -103,7 +113,7 @@ class Query:
 # 11. Count all male employees.
     def count_all_male_emp(self):
         query = """
-            Select COUNT(*) FROM employees
+            Select COUNT(EmployeeID) FROM employees AS emp_count
             WHERE (TitleOfCourtesy = 'Mr.' OR TitleOfCourtesy = 'Dr.');
         """
         for i in self.cursor.execute(query):
@@ -111,7 +121,21 @@ class Query:
 
 # 12. Count how many employees are there from the different cities. For example, there are 4 employees from London.
     def count_emp_from_diff_cities(self):
-        pass
+        query1 = """
+            SELECT DISTINCT City
+            FROM employees;
+        """
+        query2 = """
+            SELECT ShipCity, COUNT(OrderID) AS order_count
+            FROM Orders
+            GROUP BY ShipCity
+            ORDER BY  order_count DESC;
+        """
+        query3 = """
+            SELECT City, COUNT(City)
+            FROM employees
+            GROUP BY City;
+        """
 
 # 13. List all OrderIDs and the employees (by first and last name) that have created them.
     def list_all_orderIDs_and_emp_who_create_it(self):
