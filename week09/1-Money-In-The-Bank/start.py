@@ -1,8 +1,10 @@
 import sql_manager
 import getpass
+from settings import *
 
 
 def main_menu():
+    sql_manager.create_clients_table()
     print("Welcome to our bank service. You are not logged in. \nPlease register or login")
 
     while True:
@@ -11,9 +13,7 @@ def main_menu():
         if command == 'register':
             username = input("Enter your username: ")
             password = getpass.getpass('Enter your password:')
-
             print(sql_manager.register(username, password))
-
 
         elif command == 'login':
             username = input("Enter your username: ")
@@ -48,7 +48,7 @@ def logged_menu(logged_user):
             print("Your balance is:" + str(logged_user.get_balance()) + '$')
 
         elif command == 'changepass':
-            new_pass = input("Enter your new password: ")
+            new_pass = getpass.getpass('Enter your password:')
             sql_manager.change_pass(new_pass, logged_user)
 
         elif command == 'change-message':

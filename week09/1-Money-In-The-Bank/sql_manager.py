@@ -1,5 +1,6 @@
 import sqlite3
 import re
+import hashlib
 from Client import Client
 from settings import *
 
@@ -13,7 +14,8 @@ def create_clients_table():
                 username TEXT,
                 password TEXT,
                 balance REAL DEFAULT 0,
-                message TEXT)'''
+                message TEXT,
+                email TEXT)'''
 
     cursor.execute(create_query)
 
@@ -26,10 +28,15 @@ def change_message(new_message, logged_user):
     logged_user.set_message(new_message)
 
 
+def hash_pass(password):
+    return hashlib.sha1(password.encode()).hexdigest()
+
+
 def change_pass(new_pass, logged_user):
+    hashed_pass = hash_pass(new_pass)
     # update_sql = "UPDATE clients SET password = '%s' WHERE id = '%s'" % (new_pass, logged_user.get_id())
     update_sql = "UPDATE clients SET password = ? WHERE id = ?"
-    cursor.execute(update_sql, (new_pass, logged_user.get_id()))
+    cursor.execute(update_sql, (hashed_pass, logged_user.get_id()))
     conn.commit()
 
 
@@ -45,10 +52,11 @@ def check_pass(username, password):
 
 
 def register(username, password):
+    hashed_pass = hash_pass(password)
     if check_pass(username, password):
         # insert_sql = "insert into clients (username, password) values ('%s', '%s')" % (username, password)
         insert_sql = "INSERT INTO clients (username, password) values (?, ?)"
-        cursor.execute(insert_sql, (username, password))
+        cursor.execute(insert_sql, (username, hashed_pass))
         conn.commit()
         return succ_log_in
     else:
@@ -56,10 +64,11 @@ def register(username, password):
 
 
 def login(username, password):
+    hashed_pass = hash_pass(password)
     # select_query = "SELECT id, username, balance, message FROM clients WHERE username = '%s' AND password = '%s' LIMIT 1" % (username, password)
     select_query = "SELECT id , username, balance, message FROM clients WHERE username = ? AND password = ? LIMIT 1"
 
-    cursor.execute(select_query, (username, password))
+    cursor.execute(select_query, (username, hashed_pass))
     user = cursor.fetchone()
 
     if(user):
