@@ -1,6 +1,7 @@
 import sqlite3
 import re
 from Client import Client
+from settings import *
 
 conn = sqlite3.connect("bank.db")
 cursor = conn.cursor()
@@ -33,7 +34,7 @@ def change_pass(new_pass, logged_user):
 
 
 def check_pass(username, password):
-    long_en = len(password) >= 8
+    long_en = len(password) >= PASS_MIN_LEN
     not_cont_usern = username not in password
     has_let_cap_let = re.search(r'[a-z]', password) and re.search(r'[A-Z]', password)
     has_digit = re.search(r'\d', password)
@@ -49,12 +50,9 @@ def register(username, password):
         insert_sql = "INSERT INTO clients (username, password) values (?, ?)"
         cursor.execute(insert_sql, (username, password))
         conn.commit()
-        return 'Succesffuly registered!'
+        return succ_log_in
     else:
-        return '''
-            Please choose strong pass or JohnTheRiper will come for you!
-            aka. More than 8 symbols, capital letters, special symbol, digit!
-            '''
+        return strong_pass_msg
 
 
 def login(username, password):

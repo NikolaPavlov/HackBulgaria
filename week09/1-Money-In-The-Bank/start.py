@@ -1,4 +1,5 @@
 import sql_manager
+import getpass
 
 
 def main_menu():
@@ -9,14 +10,14 @@ def main_menu():
 
         if command == 'register':
             username = input("Enter your username: ")
-            password = input("Enter your password: ")
+            password = getpass.getpass('Enter your password:')
 
             print(sql_manager.register(username, password))
 
 
         elif command == 'login':
             username = input("Enter your username: ")
-            password = input("Enter your password: ")
+            password = getpass.getpass('Enter your password:')
 
             logged_user = sql_manager.login(username, password)
 
