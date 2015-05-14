@@ -1,14 +1,15 @@
 import sqlite3
 import re
 import hashlib
-import os
-import binascii
 import smtplib
+import random
+import string
 from Client import Client
 from settings import *
 
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
+
 
 def create_clients_table():
     reset_query = "DROP TABLE IF EXISTS clients"
@@ -20,9 +21,12 @@ def create_clients_table():
                 message TEXT,
                 email TEXT,
                 fail_login_attemps REAL DEFAULT 0)'''
+    add_test_user = "INSERT INTO clients (username, password, email) VALUES (?, ?, ?)"
 
     cursor.execute(reset_query)
     cursor.execute(create_query)
+    cursor.execute(add_test_user, ('gogo', 'Password1!', 'rastamandito@mail.bg'))
+    conn.commit()
 
 
 def change_message(new_message, logged_user):
@@ -66,7 +70,7 @@ def register(username, password, email):
     if check_email(email):
         return email_fail_msg
     if check_pass(username, password):
-        insert_sql = "INSERT INTO clients (username, password, email) values (?, ?, ?)"
+        insert_sql = "INSERT INTO clients (username, password, email) VALUES (?, ?, ?)"
         cursor.execute(insert_sql, (username, hashed_pass, email))
         conn.commit()
         return succ_log_in
@@ -88,23 +92,30 @@ def login(username, password):
 
 
 def generate_random_string():
-    return(binascii.b2a_hex(os.urandom(15)))
+    random_str = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(32)])
+    return random_str
+
+
+def update_reseted_pass(password, username):
+    update_sql = "UPDATE clients SET password = ? WHERE username = ?"
+    cursor.execute(update_sql, (password, username))
+    conn.commit()
 
 
 def send_reset_email(username, email):
     random_string = generate_random_string()
-    new_pass = random_string
+    new_pass = hash_pass(random_string)
+    update_reseted_pass(new_pass, username)
     gmail_user = GMAIL_USER
     gmail_pass = GMAIL_PASS
     FROM = GMAIL_USER
     TO = email
     SUBJECT = 'reseting the password for the bank $$$ money comming!!!'
-    TEXT = 'Your new pass is: {}'.format(new_pass)
+    TEXT = 'Your new pass is: {}'.format(random_string)
     message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
             """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
     try:
         server = smtplib.SMTP("smtp.gmail.com", 587)
-        # server.ehlo()
         server.starttls()
         server.login(gmail_user, gmail_pass)
         server.sendmail(FROM, TO, message)
