@@ -1,6 +1,7 @@
 PASS_MIN_LEN = 8
 BLOCK_TIMMER = 300 #seconds
 WRONG_PASS_ATEMPS = 5
+DB = "bank.db"
 
 succ_log_in = 'Succesffuly registered!'
 strong_pass_msg = '''

@@ -4,7 +4,7 @@ import hashlib
 from Client import Client
 from settings import *
 
-conn = sqlite3.connect("bank.db")
+conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
 
@@ -21,7 +21,6 @@ def create_clients_table():
 
 
 def change_message(new_message, logged_user):
-    # update_sql = "UPDATE clients SET message = '%s' WHERE id = '%s'" % (new_message, logged_user.get_id())
     update_sql = "UPDATE clients SET message = ? WHERE id = ?"
     cursor.execute(update_sql, (new_message, logged_user.get_id()))
     conn.commit()
@@ -34,7 +33,6 @@ def hash_pass(password):
 
 def change_pass(new_pass, logged_user):
     hashed_pass = hash_pass(new_pass)
-    # update_sql = "UPDATE clients SET password = '%s' WHERE id = '%s'" % (new_pass, logged_user.get_id())
     update_sql = "UPDATE clients SET password = ? WHERE id = ?"
     cursor.execute(update_sql, (hashed_pass, logged_user.get_id()))
     conn.commit()
@@ -54,7 +52,6 @@ def check_pass(username, password):
 def register(username, password):
     hashed_pass = hash_pass(password)
     if check_pass(username, password):
-        # insert_sql = "insert into clients (username, password) values ('%s', '%s')" % (username, password)
         insert_sql = "INSERT INTO clients (username, password) values (?, ?)"
         cursor.execute(insert_sql, (username, hashed_pass))
         conn.commit()
@@ -65,7 +62,6 @@ def register(username, password):
 
 def login(username, password):
     hashed_pass = hash_pass(password)
-    # select_query = "SELECT id, username, balance, message FROM clients WHERE username = '%s' AND password = '%s' LIMIT 1" % (username, password)
     select_query = "SELECT id , username, balance, message FROM clients WHERE username = ? AND password = ? LIMIT 1"
 
     cursor.execute(select_query, (username, hashed_pass))
