@@ -11,13 +11,13 @@ class SqlManagerTests(unittest.TestCase):
 
     def setUp(self):
         sql_manager.create_clients_table()
-        sql_manager.register('Tester', "StrongPassFuckJ0hnTheR1pper#")
+        sql_manager.register('Tester', 'StrongPassFuckJ0hnTheR1pper#', 'fuckmf@wearefucked.com')
 
     def tearDown(self):
         sql_manager.cursor.execute('DROP TABLE clients')
 
     def test_register(self):
-        sql_manager.register('Dinko', 'StrongPassFuckJ0hnTheR1pper#')
+        sql_manager.register('Dinko', 'StrongPassFuckJ0hnTheR1pper#', 'fuckmf@wearefucked.com')
 
         sql_manager.cursor.execute('''
             SELECT Count(*) FROM clients

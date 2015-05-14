@@ -1,6 +1,9 @@
 import sqlite3
 import re
 import hashlib
+import os
+import binascii
+import smtplib
 from Client import Client
 from settings import *
 
@@ -52,7 +55,9 @@ def check_pass(username, password):
 
 
 def check_email(email):
-    if not re.match(EMAIL_REGEX, email):
+    if re.match(EMAIL_REGEX, email):
+        return False
+    else:
         return True
 
 
@@ -80,3 +85,31 @@ def login(username, password):
         return Client(user[0], user[1], user[2], user[3])
     else:
         return False
+
+
+def generate_random_string():
+    return(binascii.b2a_hex(os.urandom(15)))
+
+
+def send_reset_email(username, email):
+    random_string = generate_random_string()
+    new_pass = random_string
+    gmail_user = GMAIL_USER
+    gmail_pass = GMAIL_PASS
+    FROM = GMAIL_USER
+    TO = email
+    SUBJECT = 'reseting the password for the bank $$$ money comming!!!'
+    TEXT = 'Your new pass is: {}'.format(new_pass)
+    message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
+            """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        # server.ehlo()
+        server.starttls()
+        server.login(gmail_user, gmail_pass)
+        server.sendmail(FROM, TO, message)
+        server.quit()
+        print('successfully send the mail')
+    except:
+        print('failed to send the mail')
+

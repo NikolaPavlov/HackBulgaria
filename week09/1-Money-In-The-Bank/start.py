@@ -27,6 +27,11 @@ def main_menu():
             else:
                 print("Login failed")
 
+        elif command == 'reset-password':
+            username = input("Enter your username: ")
+            email = input("Enter your email: ")
+            sql_manager.send_reset_email(username, email)
+
         elif command == 'help':
             print("login - for logging in!")
             print("register - for creating new account!")
@@ -64,6 +69,7 @@ def logged_menu(logged_user):
             print("changepass - for changing passowrd")
             print("change-message - for changing users message")
             print("show-message - for showing users message")
+            print("reset-password - for sending new pass via email")
 
 
 def main():

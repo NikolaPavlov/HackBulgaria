@@ -2,6 +2,8 @@ PASS_MIN_LEN = 8
 BLOCK_TIMMER = 300
 WRONG_PASS_ATEMPS = 5
 EMAIL_REGEX = "^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$"
+GMAIL_USER = "testing.spaming.python.RuleZ@gmail.com"
+GMAIL_PASS = "pythonrulz"
 DB = "bank.db"
 
 succ_log_in = 'Succesffuly registered!'
