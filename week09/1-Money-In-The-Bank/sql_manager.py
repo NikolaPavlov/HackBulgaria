@@ -7,16 +7,18 @@ from settings import *
 conn = sqlite3.connect(DB)
 cursor = conn.cursor()
 
-
 def create_clients_table():
+    reset_query = "DROP TABLE IF EXISTS clients"
     create_query = '''create table if not exists
         clients(id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT,
                 password TEXT,
                 balance REAL DEFAULT 0,
                 message TEXT,
-                email TEXT)'''
+                email TEXT,
+                fail_login_attemps REAL DEFAULT 0)'''
 
+    cursor.execute(reset_query)
     cursor.execute(create_query)
 
 
@@ -49,11 +51,18 @@ def check_pass(username, password):
     return False
 
 
-def register(username, password):
+def check_email(email):
+    if not re.match(EMAIL_REGEX, email):
+        return True
+
+
+def register(username, password, email):
     hashed_pass = hash_pass(password)
+    if check_email(email):
+        return email_fail_msg
     if check_pass(username, password):
-        insert_sql = "INSERT INTO clients (username, password) values (?, ?)"
-        cursor.execute(insert_sql, (username, hashed_pass))
+        insert_sql = "INSERT INTO clients (username, password, email) values (?, ?, ?)"
+        cursor.execute(insert_sql, (username, hashed_pass, email))
         conn.commit()
         return succ_log_in
     else:

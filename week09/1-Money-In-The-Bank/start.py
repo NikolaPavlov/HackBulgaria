@@ -13,7 +13,8 @@ def main_menu():
         if command == 'register':
             username = input("Enter your username: ")
             password = getpass.getpass('Enter your password:')
-            print(sql_manager.register(username, password))
+            email = input("Enter your email:")
+            print(sql_manager.register(username, password, email))
 
         elif command == 'login':
             username = input("Enter your username: ")
