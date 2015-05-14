@@ -35,6 +35,7 @@ def main_menu():
         elif command == 'help':
             print("login - for logging in!")
             print("register - for creating new account!")
+            print("reset-password - for reset the pass via email")
             print("exit - for closing program!")
 
         elif command == 'exit':
@@ -70,6 +71,9 @@ def logged_menu(logged_user):
             print("change-message - for changing users message")
             print("show-message - for showing users message")
             print("reset-password - for sending new pass via email")
+
+        elif command == 'exit':
+            break
 
 
 def main():
