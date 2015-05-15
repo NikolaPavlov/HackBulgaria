@@ -25,7 +25,7 @@ def create_clients_table():
 
     cursor.execute(reset_query)
     cursor.execute(create_query)
-    cursor.execute(add_test_user, ('gogo', 'Password1!', 'rastamandito@mail.bg'))
+    cursor.execute(add_test_user, ('gogo', hash_pass('Password1!'), 'rastamandito@mail.bg'))
     conn.commit()
 
 
@@ -123,4 +123,63 @@ def send_reset_email(username, email):
         print('successfully send the mail')
     except:
         print('failed to send the mail')
+
+
+def get_current_balance(username):
+    get_sql = 'SELECT balance FROM clients WHERE username = ?'
+    cursor.execute(get_sql, (username,))
+    return float(cursor.fetchone()[0])
+
+
+def deposit(username, suM):
+    try:
+        suM = float(suM)
+        if suM < 0:
+            return '''
+                    You cann\'t deposit negative amount...
+                    The bank is jewish!
+                    '''
+        elif suM > 0:
+            current_balance = get_current_balance(username)
+            new_balance = current_balance + suM
+            update_sql = "UPDATE clients SET balance = ? WHERE username = ?"
+            cursor.execute(update_sql, (new_balance, username))
+            conn.commit()
+            return 'Successfully deposit {}'.format(suM)
+    except ValueError:
+        return 'You entered not a number for deposit amount!'
+
+
+def withdraw_(username, suM):
+    current_balance = get_current_balance(username)
+    if float(suM) > current_balance:
+        return 'Not enought money dude!'
+    else:
+        new_balance = current_balance - float(suM)
+        update_sql = 'UPDATE clients SET balance = ? WHERE username = ?'
+        cursor.execute(update_sql, (new_balance, username))
+        conn.commit()
+        return 'Successfully withdraw: {}\nNew balance: {}'.format(suM, new_balance)
+
+
+def withdraw(username, suM):
+    current_balance = get_current_balance(username)
+    try:
+        suM = float(suM)
+        if suM < 0:
+            return '''
+                    You cann\'t withdraw negative amount...
+                    The bank is jewish!
+                    '''
+        elif suM > 0:
+            if suM > current_balance:
+                return 'Not enought money dude!'
+            else:
+                new_balance = current_balance - suM
+                update_sql = 'UPDATE clients SET balance = ? WHERE username = ?'
+                cursor.execute(update_sql, (new_balance, username))
+                conn.commit()
+                return 'Successfully withdraw: {}\nNew balance: {}'.format(suM, new_balance)
+    except ValueError:
+        print('You entered not a number for withdraw amount!')
 

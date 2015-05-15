@@ -65,12 +65,22 @@ def logged_menu(logged_user):
         elif command == 'show-message':
             print(logged_user.get_message())
 
+        elif command == 'deposit':
+            suM_for_deposit = input('Enter the amount:')
+            print(sql_manager.deposit(logged_user.get_username(), suM_for_deposit))
+
+        elif command == 'withdraw':
+            suM_for_withdraw = input('Enter the amount:')
+            print(sql_manager.withdraw(logged_user.get_username(), suM_for_withdraw))
+
         elif command == 'help':
             print("info - for showing account info")
             print("changepass - for changing passowrd")
             print("change-message - for changing users message")
             print("show-message - for showing users message")
             print("reset-password - for sending new pass via email")
+            print("deposit - for deposit money")
+            print("withdraw - for withdraw")
 
         elif command == 'exit':
             break
