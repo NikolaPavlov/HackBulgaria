@@ -1,8 +1,10 @@
 import sql_manager
 import getpass
+from settings import *
 
 
 def main_menu():
+    sql_manager.create_clients_table()
     print("Welcome to our bank service. You are not logged in. \nPlease register or login")
 
     while True:
@@ -11,9 +13,8 @@ def main_menu():
         if command == 'register':
             username = input("Enter your username: ")
             password = getpass.getpass('Enter your password:')
-
-            print(sql_manager.register(username, password))
-
+            email = input("Enter your email:")
+            print(sql_manager.register(username, password, email))
 
         elif command == 'login':
             username = input("Enter your username: ")
@@ -26,9 +27,15 @@ def main_menu():
             else:
                 print("Login failed")
 
+        elif command == 'reset-password':
+            username = input("Enter your username: ")
+            email = input("Enter your email: ")
+            sql_manager.send_reset_email(username, email)
+
         elif command == 'help':
             print("login - for logging in!")
             print("register - for creating new account!")
+            print("reset-password - for reset the pass via email")
             print("exit - for closing program!")
 
         elif command == 'exit':
@@ -48,7 +55,7 @@ def logged_menu(logged_user):
             print("Your balance is:" + str(logged_user.get_balance()) + '$')
 
         elif command == 'changepass':
-            new_pass = input("Enter your new password: ")
+            new_pass = getpass.getpass('Enter your password:')
             sql_manager.change_pass(new_pass, logged_user)
 
         elif command == 'change-message':
@@ -58,11 +65,25 @@ def logged_menu(logged_user):
         elif command == 'show-message':
             print(logged_user.get_message())
 
+        elif command == 'deposit':
+            suM_for_deposit = input('Enter the amount:')
+            print(sql_manager.deposit(logged_user.get_username(), suM_for_deposit))
+
+        elif command == 'withdraw':
+            suM_for_withdraw = input('Enter the amount:')
+            print(sql_manager.withdraw(logged_user.get_username(), suM_for_withdraw))
+
         elif command == 'help':
             print("info - for showing account info")
             print("changepass - for changing passowrd")
             print("change-message - for changing users message")
             print("show-message - for showing users message")
+            print("reset-password - for sending new pass via email")
+            print("deposit - for deposit money")
+            print("withdraw - for withdraw")
+
+        elif command == 'exit':
+            break
 
 
 def main():
