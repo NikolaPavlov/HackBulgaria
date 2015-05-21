@@ -80,7 +80,7 @@ def logged_menu(logged_user):
             print("show-message - for showing users message")
             print("reset-password - for sending new pass via email")
             print("deposit - for deposit money")
-            print("withdraw - for withdraw")
+            print("withdraw - for withdraw money")
 
         elif command == 'exit':
             break
