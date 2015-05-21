@@ -6,8 +6,8 @@ class Movie(models.Model):
     name = models.CharField(max_length=100)
     rating = models.FloatField()
 
-    def __repr__(self):
-        return '{} - {}'.format(self.name, self.rating)
+    def __str__(self):
+        return '{}'.format(self.name)
 
 
 class Projection(models.Model):
@@ -16,7 +16,7 @@ class Projection(models.Model):
     date = models.DateField()
     time = models.TimeField()
 
-    def __repr__(self):
+    def __str__(self):
         return '{} - {} -{} - {}'.format(
             self.movie_id, self.type_projection,
             self.date, self.time)
@@ -28,7 +28,7 @@ class Reservation(models.Model):
     row = models.IntegerField()
     col = models.IntegerField()
 
-    def __repr__(self):
+    def __str__(self):
         return '{} - {} - {} - {}'. format(
             self.username, self.projection_id,
             self.row, self.col)
