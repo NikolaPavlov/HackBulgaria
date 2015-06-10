@@ -1,0 +1,1 @@
+30 0 * * *  /home/pressian/HackBG/WEEK-7/3-Weekend-Challenge/domains_stat.sh
