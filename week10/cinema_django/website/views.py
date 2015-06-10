@@ -7,3 +7,6 @@ from .models import Movie, Projection, Reservation
 def index(request):
     movies = Movie.objects.all()
     return render(request, 'base.html', locals())
+
+def projections(request):
+
