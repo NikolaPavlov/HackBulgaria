@@ -9,7 +9,3 @@ pip install -r file_with_requirements ---> install all reguirements
 pipfreeze > requirements.txt ---> create requirements
 
 deactivate
-
-
-
-
